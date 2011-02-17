@@ -66,11 +66,11 @@ module Gmail2tracker
         project = project(message)
         # extrem caching
         story = @@stories[message.subject] ||= begin
-                                         stories = @@stories[project.id] ||= project.stories.all
-                                         stories.find do |story|
-                                           story.name == message.subject
-                                         end
-                                       end
+                                                 stories = @@stories[project.id] ||= project.stories.all
+                                                 stories.find do |story|
+                                                   story.name == message.subject
+                                                 end
+                                               end
         p story
         load_story story, project
       end
@@ -88,9 +88,14 @@ module Gmail2tracker
         @@projects[:all] ||= project_client.all
         p @@projects[:all].map(&:name)
         p message.labels
-        @@projects[message] ||= @@projects[:all].find do |project|
+        project = @@projects[message] ||= @@projects[:all].find do |project|
           message.labels.include? project.name
         end
+        unless project
+          p message
+          raise "Project not found for Message #{message.subject}" 
+        end
+        project
       end
     end
 
