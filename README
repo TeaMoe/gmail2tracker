@@ -1,4 +1,4 @@
 Usage:
-GMAIL_ACCOUNT=example@googlemail.com GMAIL_PASS=secret TRACKER_API_TOKEN=token ruby -Ilib lib/gmail2tracker.rb
+GMAIL_ACCOUNT=example@googlemail.com GMAIL_PASS=secret TRACKER_API_KEY=token ruby -Ilib lib/gmail2tracker.rb
 
 Exception Mails must be labeled with the Tracker Project name.
