@@ -56,13 +56,11 @@ module Gmail2tracker
       end
 
       def create message
-        p message
         @@tracker_stories[message.subject] = new( message.subject, message.link, project(message) ).create
       end
 
       def find message
         return @@tracker_stories[message.subject] if @@tracker_stories[message.subject]
-        p project(message)
         project = project(message)
         # extrem caching
         story = @@stories[message.subject] ||= begin
@@ -71,7 +69,6 @@ module Gmail2tracker
                                                    story.name == message.subject
                                                  end
                                                end
-        p story
         load_story story, project
       end
 
@@ -92,7 +89,6 @@ module Gmail2tracker
           message.labels.include? project.name
         end
         unless project
-          p message
           raise "Project not found for Message #{message.subject}" 
         end
         project

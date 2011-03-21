@@ -24,7 +24,6 @@ module Gmail2tracker
       ENV["GMAIL_ACCOUNT"],
       ENV["GMAIL_PASS"]
     ]
-    p credentials
   end
 end
 
